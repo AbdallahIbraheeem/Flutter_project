@@ -1,33 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project1/pages/intropage.dart';
+import 'package:provider/provider.dart';
+import 'Authtentication/login.dart';
+import 'models/cart.dart';
 
 
-import 'LoginScreen.dart';
-import 'authentication.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'AG Store',
-      theme: ThemeData(
-        primaryColor: Colors.white,
-        appBarTheme: AppBarTheme(color: Colors.deepPurple),
-
-      ),
-
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => AuthenticationBloc()),
-        ],
-        child: LoginScreen(),
+    return ChangeNotifierProvider(
+      create: (context) => Cart(),
+      builder: (context, child) => const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: LoginScreen(),
       ),
     );
   }
 }
+
